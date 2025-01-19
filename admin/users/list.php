@@ -33,6 +33,7 @@ $result = mysqli_query($conn,$query);
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Avatar</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Admin</th>
@@ -43,6 +44,10 @@ $result = mysqli_query($conn,$query);
             <?php while ($row = mysqli_fetch_array($result)) { ?>
                 <tr>
                     <td><?= $row['id'] ?></td>
+                    <td> 
+                        <img  style="width:50;height:50px; border-radius: 50%;" alt="Avatar"
+                         src="/Mahara-Tech-PHP/uploads/<?= $row['name'] . "." . $row['avatar'] ?>" >
+                    </td>
                     <td><?php echo $row['name'] ?></td>
                     <td><?= $row['email'] ?></td>
                     <td><?= ($row['is_admin'])? 'Yes':'No' ?></td>

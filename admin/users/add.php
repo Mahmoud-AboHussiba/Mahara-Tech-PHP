@@ -33,10 +33,22 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $admin = (isset($_POST['admin'])) ? 1 : 0;
 
 
+         // upload files
+         $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . '/Mahara-Tech-PHP/uploads';
+         $avatar = '';
+         if($_FILES["avatar"]['error'] == UPLOAD_ERR_OK){
+             $tmp_name = $_FILES["avatar"]["tmp_name"];
+             $avatar = basename($_FILES["avatar"]["name"]);
+             move_uploaded_file($tmp_name, "$uploads_dir/$name.$avatar");
+         }else{
+             echo "File can't be uploaded";
+             exit;
+         }
+
         // Insert the data
         $query = "insert into `users` 
-        (`name`,`email`,`password`,`is_admin`) values
-        ('" . $name . "','" . $email . "','" . $password ."','" . $admin . "')";
+        (`name`,`email`,`avatar`,`password`,`is_admin`) values
+        ('" . $name . "','" . $email . "','". $avatar . "','" . $password ."','" . $admin . "')";
 
         if(mysqli_query($conn,$query)){
             header("Location: list.php");
@@ -59,7 +71,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <title>Admin :: Add User</title>
     </head>
     <body>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
             <label for="name">Name</label>
             <input type="text" name="name" id="name" value=<?= isset($_POST['name']) ? $_POST['name']:'' ?> >
             <?php if (in_array("name", $error_fields))
@@ -76,6 +88,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 echo "* Please enter a password not less than 6 characters"; ?>
             <br/>
             <input type="checkbox" name="admin" <?= isset($_POST['admin']) ? 'checked':'' ?>/>Admin
+            <br/>
+            <label for="avatar">Avatar</label>
+            <input type="file" id="avatar" name="avatar" />
             <br/>
             <input type="submit" name="submit" value="Add User"/>
         </form>
