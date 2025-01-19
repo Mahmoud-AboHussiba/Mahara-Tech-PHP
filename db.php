@@ -1,7 +1,7 @@
 <?php 
 
 // Open the connection 
-$conn = mysqli_connect('localhost:8000','root',password: 'password','blog');
+$conn = mysqli_connect('localhost', 'root','','fundamentals');
 if(!$conn){
     echo mysqli_connect_error();
     exit;
@@ -14,7 +14,7 @@ while($row = mysqli_fetch_assoc($result)){
     echo "Id: ".$row['id']."<br />";
     echo "Name: ".$row['name']."<br />";
     echo "Email: ".$row['email']."<br />";
-    echo str_repeat("-",50);
+    echo str_repeat("-",50)."<br />";
 }
 
 // Close the connection
