@@ -8,6 +8,13 @@ if(!$conn){
 
 // Do the operation
 $query = "select * from `users`";
+
+// Search by the name or the email
+if(isset($_GET['search'])){
+    $search = mysqli_escape_string($conn, $_GET['search']);
+    $query .= " where `users`.`name` like '%" . $search . "%' or `users`.`email` like '%" . $search . "%'"; 
+} 
+
 $result = mysqli_query($conn,$query);
 ?>
 
@@ -17,6 +24,11 @@ $result = mysqli_query($conn,$query);
     </head>
     <body>
         <h1>List Users</h1>
+        <form method="GET">
+            <input type="text" name="search" placeholder="Enter {Name} or {Eami} to search"
+              value=<?= isset($_GET['search']) ? $_GET['search']:''?> >
+            <input type="submit" value="search">
+        </form>
         <table>
             <thead>
                 <tr>
