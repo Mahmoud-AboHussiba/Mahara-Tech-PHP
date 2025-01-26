@@ -108,7 +108,7 @@ class MysqlAdapter
      * Fetch a row from the result set as an associative array
      */
     public function fetch(){
-        if($this->_result){
+        if($this->_result !== null){
             if(($row = mysqli_fetch_array($this->_result,MYSQLI_ASSOC) === false)){
                 $this->freeResult();
             }
@@ -122,7 +122,7 @@ class MysqlAdapter
      */
     public function fetchAll(){
         if($this->_result !== null) {
-            if(($all = mysqli_fetch_all($this->_result,MYSQLI_ASSOC) === false)){
+            if(($all = mysqli_fetch_all($this->_result,MYSQLI_ASSOC)) === false){
                 $this->freeResult();
             }
             return $all;
@@ -203,4 +203,4 @@ class MysqlAdapter
 
 }
 
-?>
+

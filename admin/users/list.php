@@ -21,7 +21,6 @@ if(isset($_SESSION['id'])){
 
 $user = new User();
 $users = $user->getUsers();
-echo "suers: ". $users;
 // Search by the name or the email
 if(isset($_GET['search'])){
 //    $search = mysqli_escape_string($conn, $_GET['search']);
