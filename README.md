@@ -1,4 +1,4 @@
-# Mahara Tech Course Project
+# Mahara Tech - PHP web application
 
 
 This project is an implementation of a PHP web application [![Mahara Tech Course](https://img.shields.io/badge/Mahara%20Tech-Web%20Development-blue)](https://maharatech.gov.eg/course/view.php?id=21) , 
